@@ -1,15 +1,7 @@
 #include <bits/stdc++.h>
 #include <stdlib.h>
-#include <time.h>
 using namespace std;
 
-int generate_demand()
-{
-    //initialize random seed
-    srand(time(NULL));
-    //generate random number between 0 to 99
-    return rand() % 100;
-}
 int main()
 {
     int P, Q, stock, today, dueDate, unitsDue, startDate, demand, reorderCost;
@@ -19,13 +11,15 @@ int main()
     for(int i=0;i<5;i++)
     {
         cin>>P>>Q; //125 150
+        //initialize random seed for constant random values
+        srand(0);
 
         //All the initializations
         startDate = 1;
-        dueDate = 0; //startDate+3;
+        dueDate = 0;
         today = startDate;
         unitsDue = 0;
-        reorderCost = 10; //not given
+        reorderCost = 2; //not given
         stock = 115;
         total_cost=0;
 
@@ -38,7 +32,7 @@ int main()
                 unitsDue=0;
             }
             //Today's demand of orders
-            demand = generate_demand();
+            demand = rand() % 100;
 
             //If demand less than stock, add carrying cost
             if(demand<=stock)
@@ -63,7 +57,6 @@ int main()
         }
 
         cout<<"Total Cost for P= "<<P<<" and Q= "<<Q<<" is "<<total_cost<<"\n";
-
     }
     return 0;
 }
@@ -74,4 +67,19 @@ Input values for P and Q:
 150 250
 175 250
 175 300
+
+Output:
+125 150
+Total Cost for P= 125 and Q= 150 is 40383.8
+125 250
+Total Cost for P= 125 and Q= 250 is 42224.2
+150 250
+Total Cost for P= 150 and Q= 250 is 42053.2
+175 250
+Total Cost for P= 175 and Q= 250 is 40839.2
+175 300
+Total Cost for P= 175 and Q= 300 is 42254.2
+
+For reorder cost=2, minimum cost is for P= 125 and Q= 150.
+As reorder cost increases, more Q will have more cost.
 */
